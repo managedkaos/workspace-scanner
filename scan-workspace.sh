@@ -5,15 +5,15 @@ REPORT="workspace-scan-${TAG}.md"
 
 echo "# Repo Scan for ${TOP}" | tee "${REPORT}"
 
-for i in $(find "${TOP}" -type d -name .git | sed -e 's/.git//' | sort);
+for i in $(find "${TOP}" -type d -name .git | sed -e 's#/.git##' | sort);
 do
 
-    echo "## ${i}"
     cd "${i}" || true
+    echo "## ${i#${TOP}}"
 
     echo '```'
     origin=$(git remote get-url --all origin)
-    repo=$(git remote get-url --all origin | gsed -e 's|:|/|' -e 's|git@|https://|' -e 's|\.com\-[^/]\+|.com|' -e 's|\.git$||')
+    repo=$(git remote get-url --all origin | /usr/local/bin/gsed -e 's|:|/|' -e 's|git@|https://|' -e 's|\.com\-[^/]\+|.com|' -e 's|\.git$||')
     echo "Origin: ${origin}"
     echo "Web UI: ${repo}"
     echo '```'
