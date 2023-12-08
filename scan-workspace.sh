@@ -13,7 +13,7 @@ do
 
     echo '```'
     origin=$(git remote get-url --all origin)
-    repo=$(git remote get-url --all origin | /usr/local/bin/gsed -e 's|:|/|' -e 's|git@|https://|' -e 's|\.com\-[^/]\+|.com|' -e 's|\.git$||')
+    repo=$(git remote get-url --all origin | /opt/homebrew/bin/gsed -e 's|:|/|' -e 's|git@|https://|' -e 's|\.com\-[^/]\+|.com|' -e 's|\.git$||')
     echo "Origin: ${origin}"
     echo "Web UI: ${repo}"
     echo '```'
